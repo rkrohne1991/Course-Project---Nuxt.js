@@ -1,6 +1,7 @@
 {
   "name": "course-project---nuxt",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -8,6 +9,7 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "glob-parent": "^6.0.1",
     "nuxt": "^2.15.7"
   }
