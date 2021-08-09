@@ -6,13 +6,9 @@
 
 <script>
 
-import PostList from '@/components/Posts/PostList';
 import { mapGetters } from "vuex";
 
 export default {
-    components: {
-        PostList
-    },
     // fetch(context) {
         // if (context.store.state.loadedPosts.length > 0) {
         //     return null;

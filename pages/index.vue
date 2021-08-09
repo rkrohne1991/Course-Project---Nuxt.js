@@ -9,13 +9,9 @@
 
 <script>
 
-import PostList from '@/components/Posts/PostList';
 import { mapGetters } from "vuex";
 
 export default {
-    components: {
-        PostList
-    },
     // asyncData(context, callback) {
     //     setTimeout(() => {
     //         callback(null, {

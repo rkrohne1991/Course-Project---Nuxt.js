@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const state = () => ({
     loadedPosts: [],
 })
@@ -21,11 +19,11 @@ export const mutations = {
 
 export const actions = {
     nuxtServerInit(vuexContext, context) {
-        return axios.get(process.env.baseUrl + '/posts.json')
-            .then(res => {
+        return context.app.$axios.$get('/posts.json')
+            .then(data => {
                 const postsArray = [];
-                for (const key in res.data) {
-                    postsArray.push( {...res.data[key], id: key} );
+                for (const key in data) {
+                    postsArray.push( {...data[key], id: key} );
                 }
                 vuexContext.commit('setPosts', postsArray)
             })
@@ -47,18 +45,16 @@ export const actions = {
             updatedDate: new Date() 
         };
 
-        console.log(createdPost);
-
-        return axios.post(process.env.baseUrl + '/posts.json', createdPost)
-        .then(result => {
-            vuexContext.commit('addPost', { ...createdPost, id: result.data.name });
+        return this.$axios.$post('/posts.json', createdPost)
+        .then(data => {
+            vuexContext.commit('addPost', { ...createdPost, id: data.name });
         })
         .catch(e => console.log(e));
     },
     editPost(vuexContext, editedPost) {
 
-        return axios.put(process.env.baseUrl + '/posts/' + editedPost.id + '.json', editedPost)
-        .then(result => {
+        return this.$axios.$put('/posts/' + editedPost.id + '.json', editedPost)
+        .then(data => {
             vuexContext.commit('editPost', editedPost);
         })
         .catch(e => console.log(e));

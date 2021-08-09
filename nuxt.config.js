@@ -39,13 +39,15 @@ module.exports = {
     ** Global CSS
     */
     css: [
+        '~/assets/styles/main.css'
     ],
 
     /*
     ** Plugins to load before mounting the App
     */
     plugins: [
-        // "@babel/plugin-proposal-private-methods"
+        '~/plugins/core-components.js',
+        '~/plugins/date-filter.js',
     ],
 
     /*
@@ -54,6 +56,11 @@ module.exports = {
     modules: [
         '@nuxtjs/axios',
     ],
+
+    axios: {
+        baseURL: process.env.BASE_URL || 'https://nuxt-blog-a4571-default-rtdb.firebaseio.com',
+        credentials: false,
+    },
 
     /*
     ** Build configuration
@@ -73,5 +80,10 @@ module.exports = {
                 ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
             ]
         }
+    },
+
+    transition: {
+        name: 'fade',
+        mode: 'out-in',
     }
 }
