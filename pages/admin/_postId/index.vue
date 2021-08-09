@@ -9,7 +9,6 @@
 <script>
 
 import AdminPostForm from '@/components/Admin/AdminPostForm';
-import axios from 'axios';
 
 export default {
     layout: 'admin',
@@ -27,9 +26,8 @@ export default {
     //     }
     // },
     asyncData(context) {
-        return axios.get(
-            'https://nuxt-blog-a4571-default-rtdb.firebaseio.com/posts/' + 
-            context.params.postId + '.json'
+        return context.app.$axios.get(
+                process.env.baseUrl + '/posts/' + context.params.postId + '.json'
             )
             .then(res => {
                 return {

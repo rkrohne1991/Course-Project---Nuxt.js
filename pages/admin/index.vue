@@ -15,6 +15,7 @@
 
 import PostList from '@/components/Posts/PostList';
 import AppButton from '@/components/UI/AppButton';
+import { mapGetters } from "vuex";
 
 export default {
     layout: 'admin',
@@ -22,9 +23,9 @@ export default {
         PostList, AppButton
     },
     computed: {
-        loadedPosts() {
-            return this.$store.getters.loadedPosts;
-        }
+        ...mapGetters({
+            loadedPosts: 'loadedPosts'
+        }),
     }
 }
 

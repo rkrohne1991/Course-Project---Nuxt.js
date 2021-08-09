@@ -7,6 +7,7 @@
 <script>
 
 import PostList from '@/components/Posts/PostList';
+import { mapGetters } from "vuex";
 
 export default {
     components: {
@@ -36,9 +37,9 @@ export default {
         // });
     // },
     computed: {
-        loadedPosts() {
-            return this.$store.getters.loadedPosts;
-        }
+        ...mapGetters({
+            loadedPosts: 'loadedPosts'
+        }),
     }
     // created() {
     //     this.$store.dispatch('setPosts', this.loadedPosts);

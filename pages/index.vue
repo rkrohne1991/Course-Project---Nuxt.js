@@ -10,6 +10,7 @@
 <script>
 
 import PostList from '@/components/Posts/PostList';
+import { mapGetters } from "vuex";
 
 export default {
     components: {
@@ -26,16 +27,10 @@ export default {
 
     //     }, 1500);
     // },
-    // data() {
-    //     return {
-    //         loadedPosts: [],
-    //     }
-    // },
-    // created() {}
     computed: {
-        loadedPosts() {
-            return this.$store.getters.loadedPosts;
-        }
+        ...mapGetters({
+            loadedPosts: 'loadedPosts'
+        }),
     }
 }
 

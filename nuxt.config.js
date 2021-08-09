@@ -1,17 +1,24 @@
 const pkg = require('./package')
 
+const databaseUrl = process.env.BASE_URL || 'https://nuxt-blog-a4571-default-rtdb.firebaseio.com';
+
 module.exports = {
     // mode: 'universal',
+    // mode: 'spa',
+
+    env: {
+        baseUrl: databaseUrl
+    },
 
     /*
     ** Headers of the page
     */
     head: {
-        title: pkg.name,
+        title: 'WD Blog',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: pkg.description }
+            { hid: 'description', name: 'description', content: 'My cool Web Development Blog' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -22,7 +29,11 @@ module.exports = {
     /*
     ** Customize the progress-bar color
     */
-    loading: { color: '#3B8070' },
+    loading: { color: '#fa923f', height: '4px', duration: 5000 },
+    loadingIndicator: {
+        name: 'circle',
+        color: '#fa923f'
+    },
 
     /*
     ** Global CSS
@@ -34,12 +45,14 @@ module.exports = {
     ** Plugins to load before mounting the App
     */
     plugins: [
+        // "@babel/plugin-proposal-private-methods"
     ],
 
     /*
     ** Nuxt.js modules
     */
     modules: [
+        '@nuxtjs/axios',
     ],
 
     /*
@@ -51,6 +64,14 @@ module.exports = {
         */
         extend(config, ctx) {
         
+        },
+
+        babel:{
+            plugins: [
+                ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                ["@babel/plugin-proposal-private-methods", { "loose": true }],
+                ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+            ]
         }
     }
 }
