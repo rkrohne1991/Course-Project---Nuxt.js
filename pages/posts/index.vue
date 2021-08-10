@@ -32,6 +32,7 @@ export default {
         //     context.error(e);
         // });
     // },
+    // middleware: 'log',
     computed: {
         ...mapGetters({
             loadedPosts: 'loadedPosts'

@@ -7,7 +7,8 @@ module.exports = {
     // mode: 'spa',
 
     env: {
-        baseUrl: databaseUrl
+        baseUrl: databaseUrl,
+        fbAPIKey: 'AIzaSyA1UuPbpK-zvdOYo3cmxUojmM_TF901SMA',
     },
 
     /*
@@ -85,5 +86,9 @@ module.exports = {
     transition: {
         name: 'fade',
         mode: 'out-in',
-    }
+    },
+
+    // router: {
+    //     middleware: 'log'
+    // }
 }

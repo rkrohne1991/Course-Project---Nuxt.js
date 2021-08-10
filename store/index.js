@@ -1,5 +1,6 @@
 export const state = () => ({
     loadedPosts: [],
+    token: null,
 })
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
         );
         state.loadedPosts[postIndex] = editedPost;
     },
+    setToken(state, token) {
+        state.token = token;
+    }
 }
 
 export const actions = {
@@ -45,7 +49,7 @@ export const actions = {
             updatedDate: new Date() 
         };
 
-        return this.$axios.$post('/posts.json', createdPost)
+        return this.$axios.$post('/posts.jsonn?auth=' + vuexContext.state.token, createdPost)
         .then(data => {
             vuexContext.commit('addPost', { ...createdPost, id: data.name });
         })
@@ -53,7 +57,7 @@ export const actions = {
     },
     editPost(vuexContext, editedPost) {
 
-        return this.$axios.$put('/posts/' + editedPost.id + '.json', editedPost)
+        return this.$axios.$put('/posts/' + editedPost.id + '.json?auth=' + vuexContext.state.token, editedPost)
         .then(data => {
             vuexContext.commit('editPost', editedPost);
         })
@@ -62,11 +66,31 @@ export const actions = {
     },
     setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts);
-    }
+    },
+    authenticateUser(vuexContext, authData) {
+        let authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.fbAPIKey;
+
+        if (!authData.isLogin) {
+            authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.fbAPIKey;
+        }
+
+        return this.$axios.$post(authUrl, {
+                email: authData.email,
+                password: authData.password,
+                returnSecureToken: true,
+            }
+        ).then(result => {
+            vuexContext.commit('setToken', result.idToken);
+        })
+        .catch(e => console.log(e));
+    },
 }
 
 export const getters = {
     loadedPosts(state) {
         return state.loadedPosts;
+    },
+    isAuthenticated(state) {
+        return state.token != null;
     }
 }
