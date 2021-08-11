@@ -13,6 +13,7 @@
     "@babel/plugin-proposal-private-methods": "^7.14.5",
     "@nuxtjs/axios": "^5.12.5",
     "glob-parent": "^6.0.1",
+    "js-cookie": "^3.0.0",
     "nuxt": "^2.15.7"
   }
 }
