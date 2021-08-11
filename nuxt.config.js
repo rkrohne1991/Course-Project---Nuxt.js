@@ -1,4 +1,4 @@
-const pkg = require('./package')
+import express from 'express';
 
 const databaseUrl = process.env.BASE_URL || 'https://nuxt-blog-a4571-default-rtdb.firebaseio.com';
 
@@ -91,4 +91,9 @@ module.exports = {
     // router: {
     //     middleware: 'log'
     // }
+
+    serverMiddleware: [
+        express.json(),
+        { path: '/api', handler: '~/api/index.js' },
+    ]
 }
